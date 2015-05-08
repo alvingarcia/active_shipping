@@ -547,7 +547,7 @@ module ActiveShipping
       args = if node && node.at('CountryCode')
         {
           :country => node.at('CountryCode').text,
-          :province => node.at('StateOrProvinceCode').text,
+          :province => node.at('StateOrProvinceCode').try(:text),
           :city => node.at('City').text
         }
       else
