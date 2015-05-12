@@ -514,6 +514,9 @@ module ActiveShipping
     def build_tracking_request(tracking_number, options = {})
       xml_builder = Nokogiri::XML::Builder.new do |xml|
         xml.TrackRequest do
+          options.slice(:tracking_option).each do |key, val|
+            xml.send(key.camelcase, val)
+          end
           xml.Request do
             xml.RequestAction('Track')
             xml.RequestOption('1')
